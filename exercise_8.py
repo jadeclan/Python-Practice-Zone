@@ -12,6 +12,11 @@ def check_columns(board) -> int:
     transposed = transpose(board)
     return check_rows(transposed)
 
+# checking the columns using the zip function
+def check_columns2(board: list) -> int:
+    transposed = zip(*board)
+    return check_rows(transposed)
+
 def check_diagonals(board) -> int:
     if board[0][0] == board[1][1] == board[2][2] and board[0][0] != 0:
         return board[0][0]
@@ -23,7 +28,7 @@ def tic_tac_toe_winner(board) -> int:
 
     winner = check_rows(board)
     if winner != 0: return winner
-    winner = check_columns(board)
+    winner = check_columns2(board)
     if winner != 0: return winner
     return check_diagonals(board)
 
@@ -33,5 +38,3 @@ def main():
     print(tic_tac_toe_winner(board))
 
 main()
-
-#Hi, My name is Magid!
