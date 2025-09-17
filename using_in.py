@@ -30,4 +30,6 @@ def main():
             print ("TRUE")
         else:
             print("FALSE")
+
+    # line 24-5 provides the functionality of lines 27-32
 main()
