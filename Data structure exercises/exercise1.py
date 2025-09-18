@@ -6,6 +6,11 @@ Your function should not modify the list that was passed in.
 
 """
 def main():
-    pass
+    mylist = [0,1,2,3,4]
+
+    for i in range(len(mylist)):
+        mylist[i] += 1
+
+    print(f"Expecting [1, 2, 3, 4, 5], got: {mylist}")
 
 main()
