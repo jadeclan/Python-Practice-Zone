@@ -1,0 +1,6 @@
+{
+"row0":{"key1":1,"key2":20.1,"key3":"james"},
+"row1":{"key1":2,"key2":20.2,"key3":"fred"},
+"row2":{"key1":3,"key2":20.3,"key3":"george"},
+"row3":{"key1":4,"key2":20.4,"key3":"something"} 
+}
