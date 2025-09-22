@@ -1,45 +1,45 @@
-test_data=[
-        ['name', 'date', 'age', 'sex', 'hour'],
-        ['james', 'wed', 22.5, 'm', 6],
-        ['magid', 'tue', 18.5,'m', 12],
-        ['james', 'tue', 21.0, 'f', 23]
-    ]
+# There will be no headers in the list sent to this function, just key-value pairs
+data=[
+        {'name':'james', 'day':'wed', 'score':22.5, 'sex':'m', 'age':6},
+        {'name':'magid', 'day':'tue', 'score':18.5, 'sex':'m', 'age':12},
+        {'name':'james', 'day':'tue', 'score':21, 'sex':'f', 'age':23}
+        ]
 
-# TODO: figure whats in each column
-#item = test_data[1]
-#for field in item:
- #   print(f'{field} is a float is {isinstance(field, float)}.')
-  #  print(f'{field} is a int is {isinstance(field, int)}.')
+# Figure out what each key is   
+key_type = {}
+keys = []
+for line in data:
+    for key in line:
+        if key not in keys:
+            keys.append(key)
 
-counts = {}
-for item in test_data:
-    if item != test_data[0]:
-        if item[3] in counts:
-            counts[item[3]] += 1
-        else:
-            counts[item[3]] = 1
+for key, value in data[0].items():
+    if isinstance(value, float) or isinstance(value, int):
+        key_type[key] = 0
+    else:
+        key_type[key] = 1
 
-most_common_item = None
-highest_count = 0
-
-for item, count in counts.items():
-    if count > highest_count:
-        highest_count = count
-        most_common_item = item
-
-print(f'{most_common_item}  occured {highest_count} times.')
-
-""""
-sum = 0
-count = 0
-for line in test_data:
-    count += 1
-    if line != test_data[0]:
-        sum += line[2]
-aver = sum/(count-1)
-
-print(f'The average is: {aver:.2f}.')
-"""
+for key in keys:
+    # Calculate averages where appropriate, frequencies otherwise
+    if key_type[key] ==  0:
+        entries = [line[key] for line in data]
+        average = sum(entries)/len(entries)
+        print(f'The average {key} was {average:.1f}.')
+    else:
+        # we need the highest frequency
+        counts = {}
+        most_common_item = None
+        highest_count = 0
+        for line in data:
+            if line[key] not in counts:
+                counts[line[key]] = 1
+            else:
+                counts[line[key]] += 1
+        for key, value in counts.items():
+            if value > highest_count:
+                highest_count = value
+                most_common_item = key
+        print(f'{most_common_item}  occured {highest_count} times.')
 
 """ Your print out should look like this:
 James was the most common name, it occured 2 times.
