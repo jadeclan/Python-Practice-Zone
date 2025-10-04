@@ -9,7 +9,7 @@ def main():
     # my_tuple[4].append('!')   -> String object does not have an append method
     # my_tuple[4] += '!'        -> tuples don't support assignment
     my_list = list(my_tuple)    # Cast the tuple to a list first
-    my_list[4] += '!'           # Now we have a mutable list
+    my_list[4] += "!"           # type: ignore
     my_tuple = tuple(my_list)   # Cast the list back to a tuple, overiding the original.
     print(f"{my_tuple[4]}")
     print(f"Modified tuple now contains: {my_tuple}")

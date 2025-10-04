@@ -10,7 +10,6 @@ def get_yn(prompt: str)->bool:
             return False
         else:
             print("Invalid input. Please enter 'y' or 'n'.")
-            
 def nested_if_demo():
     """
     Demonstrates nested if statements to determine loan eligibility.
@@ -47,15 +46,7 @@ def if_elif_demo():
 
 def main():
     while True:
-        nested_if_demo()
-        # run the nested_if_demo in a loop until the user decides to quit           
-        quit = get_yn("Do you want to run another check? \n If no, the program will terminate.")
-        if quit == False:
-            print("Program will proceed to else-if demo.")
-            break
-    
-    # Run the if-elif demo in a loop until the user decides to quit
-    while True:
+        # nested_if_demo()
         if_elif_demo()           
         quit = get_yn("Do you want to run another check? \n If no, the program will terminate.")
         if quit == False:

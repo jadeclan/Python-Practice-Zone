@@ -39,12 +39,7 @@ def future_value(pv: float, r: float, n: int, t: float) -> float:
     param t: number of years the money is invested
     return: future value
     """
-    try:
-        fv = pv * (1 + r/n)**(n*t)
-        return fv
-    except Exception as e:
-        print(f"Input data contains errors: {e}")
-    return None
+    return pv * (1 + r/n)**(n*t)
 
 def main():
 
@@ -56,5 +51,4 @@ def main():
 
     print(f"In {t} years, your investment of ${pv:.2f} will be worth ${fv:.2f}")
 
-if __name__ == '__main__':
-    main()
+main()

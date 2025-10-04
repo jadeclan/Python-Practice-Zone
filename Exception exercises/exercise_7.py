@@ -1,5 +1,6 @@
 def main():
-    from exercise_4 import future_value
+    from user_prompts import get_float, get_int    
+    from future_value import future_value
 
     data =[[100.00,5,2],[150.00,10,10],[5.00,15,10],[1000.00,5,12]]
 
