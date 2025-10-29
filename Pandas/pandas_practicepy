@@ -1,0 +1,46 @@
+import pandas as pd
+import numpy as np
+#print(pd.__version__)
+
+s = pd.Series([1, 2, 3, 4])
+#print(s)
+
+#print(s.shape, s.ndim)
+#print(s.dtype, s.size, s.values)
+
+s2 = pd.Series([1, 2, 3, 4], index=['a', 'b', 'c', 'd'])
+#print(s2)
+
+sdata = {"Ohio": 35000, "Texas": 71000, "Oregon": 16000, "Utah": 5000}
+s = pd.Series(sdata)
+#print([s>20000]) # Prints boolean values for each index based on condition.
+#print(s[s>20000]) # Prints only those index values which satisfy the condition.
+#print(s.to_dict())
+# s = s * 2
+# s = np.exp(s)
+#print(s)
+
+s1 = pd.Series({'Ohio': 35000, 'Texas': 71000, 'Oregon': 16000, 'Utah': 5000})
+s2 = pd.Series({'Ohio': 10000, 'Oregon': 5000, 'Texas': 1000})
+
+#print(s1 + s2)
+
+temperature = pd.Series(
+    [22.5, 24, 19.8, 21, 23.3, 25.1, 20.7],
+    index=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    name='Celcius'
+)
+max_temp = temperature.max()
+min_temp = temperature.min()
+#print(f'{max_temp - min_temp:.2f}')
+#print(temperature[temperature>20].index)
+temps = temperature * 9/5 + 32
+temps = temps.round(1)
+print(temps)
+df = pd.DataFrame(temperature)
+
+# Convert Celsius to Fahrenheit and create a new column
+df['Fahrenheit'] = ((df['Celcius'] * 9/5) + 32).round(1)
+
+# Print the DataFrame to see the result
+print(df)
