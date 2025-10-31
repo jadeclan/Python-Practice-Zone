@@ -1,4 +1,3 @@
 {
-    "python.REPL.enableREPLSmartSend": false,
-    "python.analysis.typeCheckingMode": "standard"
+    "python.analysis.typeCheckingMode": "basic"
 }
