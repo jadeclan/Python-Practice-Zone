@@ -1,46 +1,168 @@
 import pandas as pd
 import numpy as np
-#print(pd.__version__)
+# #print(pd.__version__)
 
-s = pd.Series([1, 2, 3, 4])
-#print(s)
+# s = pd.Series([1, 2, 3, 4])
+# #print(s)
 
-#print(s.shape, s.ndim)
-#print(s.dtype, s.size, s.values)
+# #print(s.shape, s.ndim)
+# #print(s.dtype, s.size, s.values)
 
-s2 = pd.Series([1, 2, 3, 4], index=['a', 'b', 'c', 'd'])
-#print(s2)
+# s2 = pd.Series([1, 2, 3, 4], index=['a', 'b', 'c', 'd'])
+# #print(s2)
 
-sdata = {"Ohio": 35000, "Texas": 71000, "Oregon": 16000, "Utah": 5000}
-s = pd.Series(sdata)
-#print([s>20000]) # Prints boolean values for each index based on condition.
-#print(s[s>20000]) # Prints only those index values which satisfy the condition.
-#print(s.to_dict())
-# s = s * 2
-# s = np.exp(s)
-#print(s)
+# sdata = {"Ohio": 35000, "Texas": 71000, "Oregon": 16000, "Utah": 5000}
+# s = pd.Series(sdata)
+# #print([s>20000]) # Prints boolean values for each index based on condition.
+# #print(s[s>20000]) # Prints only those index values which satisfy the condition.
+# #print(s.to_dict())
+# # s = s * 2
+# # s = np.exp(s)
+# #print(s)
 
-s1 = pd.Series({'Ohio': 35000, 'Texas': 71000, 'Oregon': 16000, 'Utah': 5000})
-s2 = pd.Series({'Ohio': 10000, 'Oregon': 5000, 'Texas': 1000})
+# s1 = pd.Series({'Ohio': 35000, 'Texas': 71000, 'Oregon': 16000, 'Utah': 5000})
+# s2 = pd.Series({'Ohio': 10000, 'Oregon': 5000, 'Texas': 1000})
 
-#print(s1 + s2)
+# #print(s1 + s2)
 
-temperature = pd.Series(
-    [22.5, 24, 19.8, 21, 23.3, 25.1, 20.7],
-    index=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    name='Celcius'
-)
-max_temp = temperature.max()
-min_temp = temperature.min()
-#print(f'{max_temp - min_temp:.2f}')
-#print(temperature[temperature>20].index)
-temps = temperature * 9/5 + 32
-temps = temps.round(1)
-print(temps)
-df = pd.DataFrame(temperature)
+# temperature = pd.Series(
+#     [22.5, 24, 19.8, 21, 23.3, 25.1, 20.7],
+#     index=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+#     name='Celcius'
+# )
+# max_temp = temperature.max()
+# min_temp = temperature.min()
+# #print(f'{max_temp - min_temp:.2f}')
+# #print(temperature[temperature>20].index)
+# temps = temperature * 9/5 + 32
+# temps = temps.round(1)
+# print(temps)
+# df = pd.DataFrame(temperature)
 
-# Convert Celsius to Fahrenheit and create a new column
-df['Fahrenheit'] = ((df['Celcius'] * 9/5) + 32).round(1)
+# # Convert Celsius to Fahrenheit and create a new column
+# df['Fahrenheit'] = ((df['Celcius'] * 9/5) + 32).round(1)
 
-# Print the DataFrame to see the result
+# # Print the DataFrame to see the result
+# print(df)
+
+# df = pd.DataFrame(
+#     {"Ohio": {2000: 1.5, 2001: 1.7, 2002: 3.6},
+#      "Nevada": {2001: 2.4, 2002: 2.9}
+#     }
+# )
+# df.index.name = 'year'
+# df.columns.name = 'state'
+# print(df)
+# # # access value for first row and 2nd column
+# # print(df.iloc[0, 1])
+
+# # # access values for all rows and first 2 columns
+# # print(df.iloc[:, :2])
+
+# df.loc[:, "year"] = 1900        # Create and then set entire 'year' column to 1900
+# df.iloc[2, :] = 5               # Set entire 3rd row to 5
+# df.loc[df["Nevada"] > 2, :] = 0 # Set entire row to 0 where Nevada > 2
+
+# print(df)
+
+# Exercise 1: basic dataframe manipulation
+data = {
+    "Day": ["Monday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "Product": ["Apples", "Bananas", "Apples", "Oranges", "Apples", "Bananas", "Oranges", "Bananas"],
+    "Units Sold": [10, 15, 8, 12, 14, 20, 10, 18],
+    "Price per Unit ($)": [1.5, 0.8, 1.5, 1.2, 1.5, 0.8, 1.2, 0.8],
+} # {column headings:[rows]}
+df = pd.DataFrame(data)
+sales = df["Units Sold"] * df["Price per Unit ($)"] # Calculate total sales for each transaction and put in a 'sales' dataframe
+df["Total Sales ($)"] = sales # Add 'sales' dataframe as a new column in original dataframe
+# print(df)
+# print(df["Units Sold"]>10) # Boolean series for 'Units Sold' > 10
+print(df[df["Units Sold"]>10]) # Filtered dataframe for 'Units Sold' > 10
+print(df.loc[df['Units Sold'] > 10, ['Day', 'Product', 'Units Sold']]) # Filtered dataframe for 'Units Sold' > 10 with selected columns only
+
+# Exercise 2: indexing
+df = pd.DataFrame({
+        'patient_id': [123, 521, 888, 123],
+        'height': [1.8, 5.8, 1.6, 5.9],
+        'weight': [140,  3000,  999,  140],
+    })
+df.loc[df['height'] < 2, 'height'] *= 3.3      # Convert height from feet to meters for values < 2
+df.loc[df['weight'] > 300, 'weight'] = np.nan  # Set weight to NaN for values > 300
 print(df)
+
+# Exercise 3: more indexing
+df = pd.DataFrame({
+    'customer_name': ['eric', 'alice', 'bob'],
+    'pizza_size': [8, 10, 12],
+    'qty': [1, 1, 2],
+})
+pf =pd.DataFrame({8:9,10:12,12:14}, index=['price'])  # pizza prices based on size
+pf = pf.T
+#calculate total price for each order
+df['total_price'] = df['pizza_size'].map(pf['price']) * df['qty']
+# Calculate discount for Eric (10% discount)
+df.loc[df['customer_name'] == 'eric', 'total_price'] *= 0.9
+# Calculate Gst and total price
+df['gst'] = round(df['total_price'] * 0.05, 2)
+df['total_with_gst'] = df['total_price'] + df['gst']
+df['total_with_gst']
+pd.set_option('display.float_format', '{:.2f}'.format) # Format float to 2 decimal places
+print(df)
+
+frame = pd.DataFrame(np.random.standard_normal((4, 3)),
+                     columns=["b", "d", "e"],
+                     index=["Utah", "Ohio", "Texas", "Oregon"])
+print(frame)
+print(frame.sum())          # sum across columns
+print(frame.sum(axis=1))    # sum across rows
+
+frame = pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})
+print(frame['a'].replace({1:10, 3:30, 4:40}))   # replace values in column 'a' based on dictionary mapping
+
+# Exercise 4: sorting
+data = {
+    "Day": ["Monday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "Product": ["Apples", "Bananas", "Apples", "Oranges", "Apples", "Bananas", "Oranges", "Bananas"],
+    "Units Sold": [10, 15, 8, 12, 14, 20, 10, 18],
+    "Price per Unit ($)": [1.5, 0.8, 1.5, 1.2, 1.5, 0.8, 1.2, 0.8],}
+# From exercise 2
+df = pd.DataFrame(data)
+sales = df["Units Sold"] * df["Price per Unit ($)"] # Calculate total sales for each transaction and put in a 'sales' dataframe
+df["Total Sales ($)"] = sales # Add 'sales' dataframe as a new column in original dataframe
+
+# Get the table row with the minimum “total sales” using 'units sold' to break ties using sort_values
+sorted_df = df.sort_values(by=['Total Sales ($)', 'Units Sold'], ascending=[True, True])
+print(sorted_df.iloc[0])  # Print the first row of the sorted dataframe (minimum total sales)
+
+# Using apply method
+frame = pd.DataFrame(np.random.standard_normal((4, 3)),
+                     columns=list("bde"),
+                     index=["Utah", "Ohio", "Texas", "Oregon"])
+def compute_range(series: pd.Series) -> float:
+    return series.max() - series.min()
+
+print(frame.apply(compute_range))                       # compute range of each column
+print(frame.apply(compute_range, axis=1))               # row wise range: axis=1 goes row-wise
+print(frame.apply(lambda s: s.max() - s.min(), axis=1)) # row wise range: using a lambda
+
+
+from datetime import datetime, timedelta
+
+d = datetime(year=1970, month=1, day=2) 
+print(d.year, d.month, d.day)
+print(d.timestamp())    # day = 1 creates a windows Errno 22 error
+right_now = datetime.now()
+print(right_now)
+
+d1 = datetime(year=2010, month=11, day=30, hour=12)
+d2 = datetime(year=2012, month=7, day=21, hour=12, minute=15)
+# subtracting datetime objects gives a timespan object
+span = d2 - d1
+print(type(span), span)
+# adding a timespan to a datetime gives another datetime
+print(d1 + timedelta(days=2, hours=1))
+
+s1 = pd.Series(['Mouse', 'dog', 'house and parrot', '23'])
+contains_ou = s1.str.contains('ou')
+print(contains_ou)
+print(s1[contains_ou])
