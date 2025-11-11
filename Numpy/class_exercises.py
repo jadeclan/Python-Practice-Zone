@@ -31,4 +31,16 @@ coordinates = np.random.random((100, 2))
 current_location = np.array([0.5, 0.5])
 taxicab_distances = np.abs(coordinates - current_location).sum(axis=1)
 print(coordinates, current_location)
-print(max(taxicab_distances))
+print((taxicab_distances))
+
+# add dx to dy
+# or
+taxicab_distances = np.abs(coordinates - current_location).sum(axis=1)
+# find index of smallest distance
+indx = taxicab_distances.argmin()
+print(indx, taxicab_distances[indx])
+
+test_range = np.arange(0,5)
+print(test_range)
+print('2:5', test_range[2:5])
+
