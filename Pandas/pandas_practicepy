@@ -7,7 +7,7 @@ import numpy as np
 # s = {"Ohio": 35000, "Texas": 71000, "Oregon": 16000, "Utah": 5000}
 # s1 = pd.Series(s)
 # s2 = pd.Series({'Ohio': 10000, 'Oregon': 5000, 'Texas': 1000})
-# print([s1>20000]) # Prints boolean values for each index based on condition.
+# print([s1>20000])   # Prints boolean values for each index based on condition.
 # print(s1[s1>20000]) # Prints only those index values which satisfy the condition.
 # print(s1.to_dict())
 # print(s1*2)
@@ -55,22 +55,22 @@ import numpy as np
 # print(df)
 
 # Exercise 1: basic dataframe manipulation
-data = {
-    "Day": ["Monday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-    "Product": ["Apples", "Bananas", "Apples", "Oranges", "Apples", "Bananas", "Oranges", "Bananas"],
-    "Units Sold": [10, 15, 8, 12, 14, 20, 10, 18],
-    "Price per Unit ($)": [1.5, 0.8, 1.5, 1.2, 1.5, 0.8, 1.2, 0.8],
-}#, {column headings:[rows]}}
-df = pd.DataFrame(data)
+# data = {
+#     "Day": ["Monday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+#     "Product": ["Apples", "Bananas", "Apples", "Oranges", "Apples", "Bananas", "Oranges", "Bananas"],
+#     "Units Sold": [10, 15, 8, 12, 14, 20, 10, 18],
+#     "Price per Unit ($)": [1.5, 0.8, 1.5, 1.2, 1.5, 0.8, 1.2, 0.8],
+# }#, {column headings:[rows]}}
+# df = pd.DataFrame(data)
 # Calculate total sales for each transaction and put in a 'sales' dataframe
 # Add 'sales' dataframe as a new column in original dataframe
 # df["Total Sales ($)"] = df["Units Sold"] * df["Price per Unit ($)"] 
 # print(df)
-# print(df["Units Sold"]>10) # Boolean series for 'Units Sold' > 10
+# print(df["Units Sold"]>10)     # Boolean series for 'Units Sold' > 10
 # print(df[df["Units Sold"]>10]) # Filtered dataframe for 'Units Sold' > 10
 # print(df.loc[df['Units Sold'] > 10, ['Day', 'Product', 'Units Sold']]) # Filtered dataframe for 'Units Sold' > 10 with selected columns only
 
-# # Exercise 2: indexing
+# Exercise 2: indexing
 # df = pd.DataFrame({
 #         'patient_id': [123, 521, 888, 123],
 #         'height': [1.8, 5.8, 1.6, 5.9],
@@ -80,18 +80,18 @@ df = pd.DataFrame(data)
 # df.loc[df['weight'] > 300, 'weight'] = np.nan  # Set weight to NaN for values > 300
 # print(df)
 
-# # Exercise 3: more indexing
+# Exercise 3: more indexing
 # df = pd.DataFrame({
 #     'customer_name': ['eric', 'alice', 'bob'],
 #     'pizza_size': [8, 10, 12],
 #     'qty': [1, 1, 2],
 # })
-# pf =pd.DataFrame({8:9,10:12,12:14}, index=['price'])  # pizza prices based on size
-# pf = pf.T
-# #calculate total price for each order
-# df['total_price'] = df['pizza_size'].map(pf['price']) * df['qty']
+# df['pizza_price'] = df['pizza_size'].replace({8:9.0,10:12.0,12:14.0}).astype(float)
+# df['total_price']= df['pizza_price'] * df['qty']
+
 # # Calculate discount for Eric (10% discount)
 # df.loc[df['customer_name'] == 'eric', 'total_price'] *= 0.9
+
 # # Calculate Gst and total price
 # df['gst'] = round(df['total_price'] * 0.05, 2)
 # df['total_with_gst'] = df['total_price'] + df['gst']
@@ -110,21 +110,21 @@ df = pd.DataFrame(data)
 # print(frame['a'].replace({1:10, 3:30, 4:40}))   # replace values in column 'a' based on dictionary mapping
 
 # # Exercise 4: sorting
-# data = {
-#     "Day": ["Monday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-#     "Product": ["Apples", "Bananas", "Apples", "Oranges", "Apples", "Bananas", "Oranges", "Bananas"],
-#     "Units Sold": [10, 15, 8, 12, 14, 20, 10, 18],
-#     "Price per Unit ($)": [1.5, 0.8, 1.5, 1.2, 1.5, 0.8, 1.2, 0.8],}
-# # From exercise 2
-# df = pd.DataFrame(data)
-# sales = df["Units Sold"] * df["Price per Unit ($)"] # Calculate total sales for each transaction and put in a 'sales' dataframe
-# df["Total Sales ($)"] = sales # Add 'sales' dataframe as a new column in original dataframe
+data = {
+    "Day": ["Monday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "Product": ["Apples", "Bananas", "Apples", "Oranges", "Apples", "Bananas", "Oranges", "Bananas"],
+    "Units Sold": [10, 15, 8, 12, 14, 20, 10, 18],
+    "Price per Unit ($)": [1.5, 0.8, 1.5, 1.2, 1.5, 0.8, 1.2, 0.8],}
+df = pd.DataFrame(data)
+df["Total Sales ($)"] = df["Units Sold"] * df["Price per Unit ($)"] # Calculate total sales for each transaction and put in a 'sales' dataframe
 
-# # Get the table row with the minimum “total sales” using 'units sold' to break ties using sort_values
-# sorted_df = df.sort_values(by=['Total Sales ($)', 'Units Sold'], ascending=[True, True])
-# print(sorted_df.iloc[0])  # Print the first row of the sorted dataframe (minimum total sales)
+# Get the table row with the minimum “total sales” using 'units sold' to break ties using sort_values
+sorted_df = df.sort_values(by=['Total Sales ($)', 'Units Sold'], ascending=[True, True])
 
-# # Using apply method
+# Print the first row of the sorted dataframe (minimum total sales)
+print(sorted_df.iloc[0, :])
+
+# Using apply method
 # frame = pd.DataFrame(np.random.standard_normal((4, 3)),
 #                      columns=list("bde"),
 #                      index=["Utah", "Ohio", "Texas", "Oregon"])
