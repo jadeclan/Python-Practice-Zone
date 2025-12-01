@@ -202,20 +202,20 @@ bios['born_date'] = pd.to_datetime(bios['born_date']) # Must convert to datetime
 # need to create two columns first to convert to datetime format.
 bios['month'] = bios['born_date'].dt.month
 bios['year']= bios['born_date'].dt.year
-# print(bios.groupby([bios['year'], bios['month']])['name'].count().reset_index().sort_values('year', ascending = True).tail(25))
+# print(bios.groupby([bios['year'], bios['month']])['name'].count().reset_index().sort_values(by=['year', 'month'], ascending = [False, True]))
 
 # ****************************************** 
 # shift(): ie coffee['yesterday'] = coffee['revenue'].shift(1) so that you could coffee['percent_change']=coffee[revenue']/coffee['yesterday']*100
 # rank(): bios['height_rank'] = bios['height_cm'].rank() compares earch athletes height.
 # rolling(): coffee
 # cumsum(): 
-# coffee = pd.read_csv('./data/coffee.csv')
-# coffee['Price'] = np.where(coffee['Coffee Type'] == 'Espresso', 3.99, 5.99)
-# coffee['Revenue'] = coffee['Units Sold'] *  coffee['Price']
-# # print(coffee.select_dtypes('float').cumsum())
-# # revenue last 3 days
+coffee = pd.read_csv('./data/coffee.csv')
+coffee['Price'] = np.where(coffee['Coffee Type'] == 'Espresso', 3.99, 5.99)
+coffee['Revenue'] = coffee['Units Sold'] *  coffee['Price']
+print(coffee)
+
+print(coffee.select_dtypes('float').cumsum())
+# revenue last 3 days
 # latte = coffee[coffee['Coffee Type'] == 'Latte'].copy()
 # latte['3day'] = latte['Units Sold'].rolling(3).sum()
 # print(latte)
-
-print(pd.__version__)
